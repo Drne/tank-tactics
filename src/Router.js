@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import AppBody from "./components/AppBody";
 import Login from "./components/Login";
 import ValidIdWrapper from "./components/ValidIDWrapper";
@@ -10,7 +10,7 @@ import KeyEventListener from "./components/KeyEventListener";
 
 export default function AppRouter() {
     return (
-        <Router style={{height: '100%'}}>
+        <Router style={{height: '100%'}} basename={"/tank-tactics"}>
             <Switch style={{height: '100%'}}>
                 <Route exact path="/" style={{height: '100%'}}>
                     <Login/>

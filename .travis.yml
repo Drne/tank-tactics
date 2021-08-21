@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 14
 script:
-  npm run build
+  npm run deploy
 cache:
   npm: false
 deploy:
