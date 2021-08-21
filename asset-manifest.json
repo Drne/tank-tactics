@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.be2db818.chunk.css",
-    "main.js": "/static/js/main.9a320562.chunk.js",
-    "main.js.map": "/static/js/main.9a320562.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.34eea2cb.js",
-    "runtime-main.js.map": "/static/js/runtime-main.34eea2cb.js.map",
-    "static/js/2.7a29852d.chunk.js": "/static/js/2.7a29852d.chunk.js",
-    "static/js/2.7a29852d.chunk.js.map": "/static/js/2.7a29852d.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.be2db818.chunk.css.map": "/static/css/main.be2db818.chunk.css.map",
-    "static/js/2.7a29852d.chunk.js.LICENSE.txt": "/static/js/2.7a29852d.chunk.js.LICENSE.txt"
+    "main.css": "/tank-tactics/static/css/main.be2db818.chunk.css",
+    "main.js": "/tank-tactics/static/js/main.9a320562.chunk.js",
+    "main.js.map": "/tank-tactics/static/js/main.9a320562.chunk.js.map",
+    "runtime-main.js": "/tank-tactics/static/js/runtime-main.7cc1c646.js",
+    "runtime-main.js.map": "/tank-tactics/static/js/runtime-main.7cc1c646.js.map",
+    "static/js/2.190bfe30.chunk.js": "/tank-tactics/static/js/2.190bfe30.chunk.js",
+    "static/js/2.190bfe30.chunk.js.map": "/tank-tactics/static/js/2.190bfe30.chunk.js.map",
+    "index.html": "/tank-tactics/index.html",
+    "static/css/main.be2db818.chunk.css.map": "/tank-tactics/static/css/main.be2db818.chunk.css.map",
+    "static/js/2.190bfe30.chunk.js.LICENSE.txt": "/tank-tactics/static/js/2.190bfe30.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.34eea2cb.js",
-    "static/js/2.7a29852d.chunk.js",
+    "static/js/runtime-main.7cc1c646.js",
+    "static/js/2.190bfe30.chunk.js",
     "static/css/main.be2db818.chunk.css",
     "static/js/main.9a320562.chunk.js"
   ]
