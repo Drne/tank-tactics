@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from "react";
-import {getGameState} from "../utilities/fetchGameData";
+import {getGameState} from "../../utilities/fetchGameData";
 import {useHistory, useParams} from "react-router-dom";
 import {useSnackbar} from "notistack";
 import socketClient from "socket.io-client";

@@ -1,5 +1,5 @@
 import {makeStyles, Switch, Typography} from "@material-ui/core";
-import useQuery from "../hooks/useQuery";
+import useQuery from "../../hooks/useQuery";
 
 export default function RangeToggle() {
 

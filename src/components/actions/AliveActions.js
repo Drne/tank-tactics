@@ -8,9 +8,9 @@ import {
     Typography
 } from "@material-ui/core";
 import {useContext, useMemo, useState} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../prodivers/GameStateProvider";
 import {useParams} from "react-router-dom";
-import {LiveDataContext} from "./LiveDataProvider";
+import {LiveDataContext} from "../prodivers/LiveDataProvider";
 
 export default function AliveActions({position}) {
 

@@ -5,9 +5,9 @@ import {
     Paper,
     Popper,
 } from "@material-ui/core";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../prodivers/GameStateProvider";
 import AliveActions from "./AliveActions";
-import DeadActions from "./DeadActions";
+import DeadActions from "../DeadActions";
 
 export default function wrapWithActionPrompt(position, component) {
     return (

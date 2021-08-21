@@ -1,10 +1,10 @@
 import {makeStyles, Paper} from "@material-ui/core";
 import {useContext, useMemo} from "react";
-import {GameStateContext} from "./GameStateProvider";
-import getDistanceBetweenPositions from "../utilities/getDistanceBetweenPositions";
-import wrapWithActionPrompt from "./ActionPrompt";
-import TankSpace from "./TankSpace";
-import useQuery from "../hooks/useQuery";
+import {GameStateContext} from "../prodivers/GameStateProvider";
+import getDistanceBetweenPositions from "../../utilities/getDistanceBetweenPositions";
+import wrapWithActionPrompt from "../actions/ActionPrompt";
+import TankSpace from "../TankSpace";
+import useQuery from "../../hooks/useQuery";
 
 export default function GameBoardV2() {
 

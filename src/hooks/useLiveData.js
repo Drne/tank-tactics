@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {GameStateContext} from "../components/GameStateProvider";
+import {GameStateContext} from "../components/prodivers/GameStateProvider";
 
 export default function useLiveData() {
     const { socket } = useContext(GameStateContext)

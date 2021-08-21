@@ -1,10 +1,10 @@
 import {AppBar, IconButton, Typography} from "@material-ui/core";
 import {useContext, useState} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "./prodivers/GameStateProvider";
 import Countdown from "react-countdown";
 import MenuIcon from '@material-ui/icons/Menu';
 import HistoryDrawer from "./drawers/HistoryDrawer";
-import GameBoardV2 from "./GameboardV2";
+import GameBoardV2 from "./gameboard/GameboardV2";
 import JuryDrawer from "./drawers/JuryDrawer";
 import MenuDrawer from "./drawers/MenuDrawer";
 import StatDrawer from "./drawers/StatDrawer";

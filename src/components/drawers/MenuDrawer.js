@@ -2,8 +2,8 @@ import {Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Paper } 
 import HistoryIcon from "@material-ui/icons/History";
 import GavelIcon from "@material-ui/icons/Gavel";
 import FavoriteIcon from "@material-ui/icons/Favorite"
-import RangeToggle from "../RangeToggle";
-import DarkModeToggle from "../DarkModeToggle";
+import RangeToggle from "../toggles/RangeToggle";
+import DarkModeToggle from "../toggles/DarkModeToggle";
 
 export default function MenuDrawer({open, setIsOpen, setIsJuryOpen, setIsStatsOpen, setIsHistoryOpen}) {
 

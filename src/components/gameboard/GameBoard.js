@@ -1,9 +1,9 @@
 import {Fade, Grid, Paper} from "@material-ui/core";
-import wrapWithActionPrompt from "./ActionPrompt";
-import TankSpace from "./TankSpace";
-import getDistanceBetweenPositions from "../utilities/getDistanceBetweenPositions";
+import wrapWithActionPrompt from "../actions/ActionPrompt";
+import TankSpace from "../TankSpace";
+import getDistanceBetweenPositions from "../../utilities/getDistanceBetweenPositions";
 import {useContext, useMemo} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../prodivers/GameStateProvider";
 
 export default function GameBoard() {
     const {gameState} = useContext(GameStateContext);
