@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tank-tactics/static/css/main.be2db818.chunk.css",
-    "main.js": "/tank-tactics/static/js/main.29144743.chunk.js",
-    "main.js.map": "/tank-tactics/static/js/main.29144743.chunk.js.map",
+    "main.js": "/tank-tactics/static/js/main.77e65178.chunk.js",
+    "main.js.map": "/tank-tactics/static/js/main.77e65178.chunk.js.map",
     "runtime-main.js": "/tank-tactics/static/js/runtime-main.7cc1c646.js",
     "runtime-main.js.map": "/tank-tactics/static/js/runtime-main.7cc1c646.js.map",
     "static/js/2.5ed169ad.chunk.js": "/tank-tactics/static/js/2.5ed169ad.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.7cc1c646.js",
     "static/js/2.5ed169ad.chunk.js",
     "static/css/main.be2db818.chunk.css",
-    "static/js/main.29144743.chunk.js"
+    "static/js/main.77e65178.chunk.js"
   ]
 }
