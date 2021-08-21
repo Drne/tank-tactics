@@ -3,11 +3,11 @@ import {useContext, useState} from "react";
 import {GameStateContext} from "./GameStateProvider";
 import Countdown from "react-countdown";
 import MenuIcon from '@material-ui/icons/Menu';
-import HistoryDrawer from "./HistoryDrawer";
+import HistoryDrawer from "./drawers/HistoryDrawer";
 import GameBoardV2 from "./GameboardV2";
-import JuryDrawer from "./JuryDrawer";
-import MenuDrawer from "./MenuDrawer";
-import StatDrawer from "./StatDrawer";
+import JuryDrawer from "./drawers/JuryDrawer";
+import MenuDrawer from "./drawers/MenuDrawer";
+import StatDrawer from "./drawers/StatDrawer";
 
 export default function AppBody() {
     const {gameState} = useContext(GameStateContext);

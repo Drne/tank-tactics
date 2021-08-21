@@ -1,5 +1,5 @@
 import {useContext, useMemo} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../GameStateProvider";
 import {Chip, Divider, Drawer, makeStyles, Paper, Typography} from "@material-ui/core";
 import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import TaskIcon from '@material-ui/icons/Note';

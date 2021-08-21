@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../GameStateProvider";
 import {Drawer, makeStyles, Paper} from "@material-ui/core";
 import ReactTimeAgo from "react-time-ago";
 

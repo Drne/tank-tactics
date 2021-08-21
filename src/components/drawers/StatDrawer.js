@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {GameStateContext} from "./GameStateProvider";
+import {GameStateContext} from "../GameStateProvider";
 import {Drawer, makeStyles, Paper, Typography} from "@material-ui/core";
 
 export default function StatDrawer({isOpen, setIsOpen}) {
