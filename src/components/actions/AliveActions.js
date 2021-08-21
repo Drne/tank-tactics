@@ -1,5 +1,5 @@
 import {
-    Button,
+    Button, CircularProgress,
     FormControl,
     FormControlLabel,
     FormLabel, makeStyles,
@@ -11,6 +11,7 @@ import {useContext, useMemo, useState} from "react";
 import {GameStateContext} from "../prodivers/GameStateProvider";
 import {useParams} from "react-router-dom";
 import {LiveDataContext} from "../prodivers/LiveDataProvider";
+import {green} from "@material-ui/core/colors";
 
 export default function AliveActions({position}) {
 
@@ -18,7 +19,7 @@ export default function AliveActions({position}) {
 
     const classes = useStyles();
 
-    const {gameState} = useContext(GameStateContext)
+    const {gameState, isLoading} = useContext(GameStateContext)
     const {id} = useParams();
     const {sendAction} = useContext(LiveDataContext)
 
@@ -44,7 +45,7 @@ export default function AliveActions({position}) {
         sendAction(id, action, position, actionCost)
     }
 
-    const disabled = !(gameState?.player?.supply > 0);
+    const disabled = !(gameState?.player?.supply > 0) || isLoading;
 
     const submitDisabled = actionCost > gameState?.player.supply - 1 || disabled
 
@@ -73,9 +74,12 @@ export default function AliveActions({position}) {
                 Available: {availableUpgrades}
             </Typography>
             <div className={classes.submitContainer}>
-                <Button type="submit" variant="contained" disabled={submitDisabled} onClick={onSubmit}>
-                    Submit
-                </Button>
+                <div className={classes.loadingButtonContainer}>
+                    <Button type="submit" variant="contained" disabled={submitDisabled} onClick={onSubmit}>
+                        Submit
+                    </Button>
+                    {isLoading && <CircularProgress size={24} className={classes.buttonProgress}/>}
+                </div>
                 {submitDisabled ? <Typography className={classes.submitErrorMessage}>
                     Insufficient Supply!
                 </Typography> : ''}
@@ -93,5 +97,16 @@ const useStyles = makeStyles(() => ({
         alignSelf: 'center',
         color: 'red',
         margin: '2px'
-    }
+    },
+    loadingButtonContainer: {
+        position: 'relative',
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    },
 }))

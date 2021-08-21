@@ -1,7 +1,7 @@
 import {Button, Typography} from "@material-ui/core";
 import {useContext} from "react";
-import {GameStateContext} from "./prodivers/GameStateProvider";
-import {LiveDataContext} from "./prodivers/LiveDataProvider";
+import {GameStateContext} from "../prodivers/GameStateProvider";
+import {LiveDataContext} from "../prodivers/LiveDataProvider";
 import {useParams} from "react-router-dom";
 
 export default function DeadActions({position}) {

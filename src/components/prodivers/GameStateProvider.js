@@ -12,11 +12,13 @@ export default function GameStateProvider({ children }) {
     const { id } = useParams();
     const [gameState, setGameState] = useState();
     const [socket, setSocket] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     let history = useHistory();
     const {enqueueSnackbar} = useSnackbar();
     
     useEffect(() => {
-        getGameState(id).then((gameState) => setGameState(gameState));
+        setIsLoading(true);
+        getGameState(id).then((gameState) => setGameState(gameState)).finally(() => setIsLoading(false));
     }, [id]);
 
     useEffect(() => {
@@ -28,10 +30,6 @@ export default function GameStateProvider({ children }) {
             sock.emit('register', id)
         });
 
-        sock.on('message', (message) => {
-            sock.send(message)
-        })
-
         sock.on('gameStateUpdate', (message) => {
             setGameState(message);
 
@@ -39,10 +37,12 @@ export default function GameStateProvider({ children }) {
                 const lastMessage = message.history[message.history.length - 1]
                 enqueueSnackbar(lastMessage.message, {variant: 'info'})
             }
+            setIsLoading(false);
         })
 
         sock.on('invalid', (message) => {
             enqueueSnackbar(`Invalid ${message.action} Action`, {variant: 'error', autoHideDuration: 1000})
+            setIsLoading(false);
         })
 
         sock.on('unlog', () => {
@@ -52,7 +52,7 @@ export default function GameStateProvider({ children }) {
     }, [enqueueSnackbar, history, id, setGameState])
 
     return (
-        <GameStateContext.Provider value={{gameState, setGameState, socket}}>
+        <GameStateContext.Provider value={{gameState, setGameState, socket, isLoading, setIsLoading}}>
             {children}
         </GameStateContext.Provider>
     )
