@@ -1,17 +1,20 @@
 import {Hidden, makeStyles, Typography} from "@material-ui/core";
 
-export default function TankSpace({health, supply, name}) {
+export default function TankSpace({health, supply, name, id}) {
 
     const classes = useStyles();
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', padding: 2}}>
+        <div style={{display: 'flex', flexDirection: 'column', padding: 2, backgroundColor: "rgb(211,211,211,0.8)"}}
+             key={id}>
             <div className={classes.topContainer}>
                 <img src={"https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/28562/tank-1-clipart-md.png"}
                      className={classes.img} alt="Tank"/>
-                <Typography className={classes.name}>
-                    {name}
-                </Typography>
+                <Hidden smDown>
+                    <Typography className={classes.name}>
+                        {name}
+                    </Typography>
+                </Hidden>
             </div>
             <div style={{display: 'flex', flexWrap: 'nowrap', alignSelf: 'center'}}>
                 <div className={classes.statContainer}>
@@ -51,5 +54,5 @@ const useStyles = makeStyles(() => ({
     name: {
         flex: 1
     },
-    img: {maxHeight: 20, maxWidth: 20, alignSelf: 'center'}
+    img: {maxHeight: 20, maxWidth: 20, alignSelf: 'center', placeContent: 'center'}
 }))

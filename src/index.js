@@ -7,8 +7,6 @@ import en from 'javascript-time-ago/locale/en';
 TimeAgo.addDefaultLocale(en)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );

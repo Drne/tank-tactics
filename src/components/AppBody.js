@@ -2,29 +2,31 @@ import {AppBar, IconButton, Typography} from "@material-ui/core";
 import {useContext, useState} from "react";
 import {GameStateContext} from "./GameStateProvider";
 import Countdown from "react-countdown";
-import HistoryIcon from '@material-ui/icons/History';
-import GavelIcon from '@material-ui/icons/Gavel';
+import MenuIcon from '@material-ui/icons/Menu';
 import HistoryDrawer from "./HistoryDrawer";
 import GameBoardV2 from "./GameboardV2";
 import JuryDrawer from "./JuryDrawer";
+import MenuDrawer from "./MenuDrawer";
+import StatDrawer from "./StatDrawer";
 
 export default function AppBody() {
     const {gameState} = useContext(GameStateContext);
     const [historyDrawerOpen, setHistoryDrawerOpen] = useState(false);
     const [juryDrawerOpen, setJuryDrawerOpen] = useState(false);
+    const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
+    const [statsDrawerOpen, setStatsDrawerOpen] = useState(false);
 
-    function handleHistoryClick() {
-        setHistoryDrawerOpen((isOpen) => !isOpen)
-    }
-
-    function handleJuryClick() {
-        setJuryDrawerOpen((isOpen) => !isOpen)
+    function handleMenuClick() {
+        setMenuDrawerOpen((isOpen) => !isOpen)
     }
 
     return (
         <div style={{height: '100%', display: 'flex', flexDirection: 'column'}}>
             <AppBar position="sticky" style={{flex: 0}}>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <IconButton style={{color: 'white'}} size={"small"} onClick={handleMenuClick}>
+                        <MenuIcon/>
+                    </IconButton>
                     <Typography style={{padding: 5}}>
                         {gameState?.player.name}
                     </Typography>
@@ -45,14 +47,6 @@ export default function AppBody() {
                             You are dead
                         </Typography> : ''
                     }
-                    <>
-                        <IconButton size={"small"} style={{color: 'white'}} onClick={handleHistoryClick}>
-                            <HistoryIcon/>
-                        </IconButton>
-                        <IconButton size={"small"} style={{color: 'white'}} onClick={handleJuryClick}>
-                            <GavelIcon/>
-                        </IconButton>
-                    </>
                     {gameState?.nextResupplyTime ?
                         <>
                             <Typography style={{padding: 5, marginLeft: 'auto'}}>
@@ -66,8 +60,11 @@ export default function AppBody() {
                     }
                 </div>
             </AppBar>
+            <StatDrawer isOpen={statsDrawerOpen} setIsOpen={setStatsDrawerOpen} />
+            <MenuDrawer open={menuDrawerOpen} setIsOpen={setMenuDrawerOpen} setIsHistoryOpen={setHistoryDrawerOpen}
+                        setIsJuryOpen={setJuryDrawerOpen} setIsStatsOpen={setStatsDrawerOpen}/>
             <HistoryDrawer open={historyDrawerOpen} setOpen={setHistoryDrawerOpen}/>
-            <JuryDrawer open={juryDrawerOpen} setOpen={setJuryDrawerOpen} />
+            <JuryDrawer open={juryDrawerOpen} setOpen={setJuryDrawerOpen}/>
             <GameBoardV2/>
         </div>
     )

@@ -34,7 +34,7 @@ export function ActionPrompt({position, children}) {
 
 
     return (
-        <div className={classes.container} >
+        <div className={classes.container} key={`${position[1]}_${[position[0]]}`}>
             {open && <img src={"https://freepngimg.com/thumb/target/6-2-target-picture.png"} className={classes.target} alt="target"/>}
             <div onClick={handleClick} className={classes.anchor}>
                 {children}

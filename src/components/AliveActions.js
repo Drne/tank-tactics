@@ -73,7 +73,7 @@ export default function AliveActions({position}) {
                 Available: {availableUpgrades}
             </Typography>
             <div className={classes.submitContainer}>
-                <Button type="submit" variant="contained" disabled={submitDisabled} onClick={onSubmit} error>
+                <Button type="submit" variant="contained" disabled={submitDisabled} onClick={onSubmit}>
                     Submit
                 </Button>
                 {submitDisabled ? <Typography className={classes.submitErrorMessage}>

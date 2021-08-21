@@ -24,7 +24,7 @@ export default function JuryDrawer({open, setOpen}) {
     }, [gameState]);
 
     return (
-        <Drawer open={open} anchor="right" onClose={() => setOpen(false)}  classes={{paper: classes.drawer}}>
+        <Drawer open={open} anchor="left" onClose={() => setOpen(false)}  classes={{paper: classes.drawer}}>
             <Paper className={classes.container}>
                 <div>
                     <Typography className={classes.type}>
@@ -32,7 +32,7 @@ export default function JuryDrawer({open, setOpen}) {
                     </Typography>
                     <Divider/>
                     {deadPlayers.map((player) => (
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} key={player.name}>
                             <Typography className={classes.playerName}>
                                 {player.name}
                             </Typography>
@@ -50,7 +50,7 @@ export default function JuryDrawer({open, setOpen}) {
                     </Typography>
                     <Divider/>
                     {alivePlayers.map((player) => (
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} key={player.name}>
                             <Typography className={classes.playerName}>
                                 {player.name}
                             </Typography>

@@ -9,11 +9,11 @@ export default function HistoryDrawer({open, setOpen}) {
     const classes = useStyles();
 
     return (
-        <Drawer open={open} anchor="right" onClose={() => setOpen(false)} classes={{paper: classes.drawer}}>
+        <Drawer open={open} anchor="left" onClose={() => setOpen(false)} classes={{paper: classes.drawer}}>
             <Paper className={classes.container}>
                 {gameState && gameState.history.map((historyEntry) => {
                     return (
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} key={historyEntry.time}>
                             <ReactTimeAgo tooltip date={new Date(historyEntry.time)} locale="en-US"/>
                             {` | ${historyEntry.message}`}
                         </Paper>

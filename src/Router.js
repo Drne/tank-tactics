@@ -6,6 +6,7 @@ import LiveDataProvider from "./components/LiveDataProvider";
 import GameStateProvider from "./components/GameStateProvider";
 import AdminLogin from "./components/AdminLogin";
 import {SnackbarProvider} from "notistack";
+import KeyEventListener from "./components/KeyEventListener";
 
 export default function AppRouter() {
     return (
@@ -19,10 +20,12 @@ export default function AppRouter() {
                 </Route>
                 <Route path="/:id">
                     <ValidIdWrapper>
-                        <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center'}}>
+                        <SnackbarProvider anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
                             <GameStateProvider>
                                 <LiveDataProvider>
-                                    <AppBody/>
+                                    <KeyEventListener>
+                                        <AppBody/>
+                                    </KeyEventListener>
                                 </LiveDataProvider>
                             </GameStateProvider>
                         </SnackbarProvider>
