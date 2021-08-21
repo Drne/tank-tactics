@@ -28,11 +28,20 @@ export default function GameBoardV2() {
                         playerAtPosition = gameState.userData.filter((playerData) => playerData.position && playerData.position[0] === y && playerData.position[1] === x)[0]
                     }
 
-                    // Range indicator
+                    // Range indicator and player border
                     const distanceFromPlayer = getDistanceBetweenPositions(gameState?.player.position, [y, x])
                     let background = gridColor;
+                    let border = ''
                     if (params.has('rangeIndicator') && distanceFromPlayer < 3) {
                         background = backgroundColors[distanceFromPlayer]
+                    }else if (distanceFromPlayer === 0) {
+                        if (isDarkMode) {
+                            border = 'thick solid blue'
+                        } else {
+                            border = "thin solid blue"
+                        }
+                    } else if (isDarkMode) {
+                        border = "thin dotted lightgray"
                     }
 
                     let itemToPush = (
@@ -44,7 +53,7 @@ export default function GameBoardV2() {
                             boxSizing: 'border-box',
                             height: '100%',
                             width: '100%',
-                            border: isDarkMode ? "thin dotted lightgray" : ''
+                            border: border
                         }} key={`${x}_${y}`}>
                             {wrapWithActionPrompt([y, x], playerAtPosition ?
                                 <TankSpace health={playerAtPosition.health} supply={playerAtPosition.supply}
