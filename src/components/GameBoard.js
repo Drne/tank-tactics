@@ -8,9 +8,9 @@ import {GameStateContext} from "./GameStateProvider";
 export default function GameBoard() {
     const {gameState} = useContext(GameStateContext);
 
-    const backgroundColors = ['lightGreen', 'orange', 'red']
-
     const gameBoard = useMemo(() => {
+
+        const backgroundColors = ['lightGreen', 'orange', 'red']
 
         function generateGridLayout() {
             const components = []
@@ -37,9 +37,9 @@ export default function GameBoard() {
                                            name={playerAtPosition.name} id={`${x}${y}`}/> :
                                 <div style={{minHeight: '60px', minWidth: '60px'}} id={`${x}${y}`}/>)}
                         </Paper>)
-                    let itemToPush = (<Grid item style={{display: 'flex', flexDirection: 'column', flex: 1}}>
+                    let itemToPush = (<div>
                         {space}
-                    </Grid>)
+                    </div>)
                     if (x === -1 || y === -1) {
                         if (x === -1 && y === -1) {
                             itemToPush = (<div style={{width: '20px'}}/>)
@@ -62,9 +62,9 @@ export default function GameBoard() {
 
 
             for (let i = -1; i < gameState.bounds[0]; i++) {
-                components.push(<Grid container item wrap={"nowrap"}>
+                components.push(<div>
                     {generateInternalComponents(i)}
-                </Grid>)
+                </div>)
             }
             return components;
         }
@@ -74,7 +74,7 @@ export default function GameBoard() {
                 {gameState && gameState.bounds && generateGridLayout()}
             </>
         )
-    }, [backgroundColors, gameState, gameState?.userData, gameState?.history])
+    }, [gameState])
 
     return (
         <Grid container justifyContent="space-around" style={{height: 'calc(100% - 24px)'}}>

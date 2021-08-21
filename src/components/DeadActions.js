@@ -1,4 +1,4 @@
-import {Button} from "@material-ui/core";
+import {Button, Typography} from "@material-ui/core";
 import {useContext} from "react";
 import {GameStateContext} from "./GameStateProvider";
 import {LiveDataContext} from "./LiveDataProvider";
@@ -25,8 +25,12 @@ export default function DeadActions({position}) {
             {
                 playerAtPosition ?
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                        {playerAtPosition.name} currently has {playerAtPosition.votesForToday}/3 votes
-
+                        <Typography>
+                            You have {playerAtPosition.votes} votes
+                        </Typography>
+                        <Typography>
+                            {playerAtPosition.name} currently has {playerAtPosition.votesForToday}/3 votes
+                        </Typography>
                         <Button onClick={handleSubmit} variant="contained">
                             Vote For {playerAtPosition.name}
                         </Button>

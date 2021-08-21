@@ -5,12 +5,13 @@ import ValidIdWrapper from "./components/ValidIDWrapper";
 import LiveDataProvider from "./components/LiveDataProvider";
 import GameStateProvider from "./components/GameStateProvider";
 import AdminLogin from "./components/AdminLogin";
+import {SnackbarProvider} from "notistack";
 
 export default function AppRouter() {
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/">
+        <Router style={{height: '100%'}}>
+            <Switch style={{height: '100%'}}>
+                <Route exact path="/" style={{height: '100%'}}>
                     <Login/>
                 </Route>
                 <Route exact path="/admin">
@@ -18,11 +19,13 @@ export default function AppRouter() {
                 </Route>
                 <Route path="/:id">
                     <ValidIdWrapper>
-                        <GameStateProvider>
-                            <LiveDataProvider>
-                                <AppBody/>
-                            </LiveDataProvider>
-                        </GameStateProvider>
+                        <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center'}}>
+                            <GameStateProvider>
+                                <LiveDataProvider>
+                                    <AppBody/>
+                                </LiveDataProvider>
+                            </GameStateProvider>
+                        </SnackbarProvider>
                     </ValidIdWrapper>
                 </Route>
             </Switch>

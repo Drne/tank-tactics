@@ -5,6 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%
+}
+
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+div.App {
+  height: 100%;
+}
+
+#root > div > div {
+  height: 100%;
 }
 
 code {
