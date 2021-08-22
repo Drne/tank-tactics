@@ -8,7 +8,6 @@ export default function KeyEventListener({children}) {
     const handleKeyDown = useCallback((event) => {
         function handleKeyDown(event) {
 
-            console.log(event.code);
             if (event.code === 'KeyD') {
                 if (params.has('darkMode')) {
                     params.delete('darkMode')
@@ -16,7 +15,7 @@ export default function KeyEventListener({children}) {
                     params.set('darkMode', "1")
                 }
                 updateParams();
-            } else if (event.code === 'KeyR') {
+            } else if (event.code === 'KeyI') {
                 if (params.has('rangeIndicator')) {
                     params.delete('rangeIndicator')
                 } else {
