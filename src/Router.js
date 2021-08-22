@@ -4,19 +4,15 @@ import Login from "./components/Login";
 import ValidIdWrapper from "./components/ValidIDWrapper";
 import LiveDataProvider from "./components/prodivers/LiveDataProvider";
 import GameStateProvider from "./components/prodivers/GameStateProvider";
-import AdminLogin from "./components/AdminLogin";
 import {SnackbarProvider} from "notistack";
 import KeyEventListener from "./components/KeyEventListener";
 
 export default function AppRouter() {
     return (
-        <Router style={{height: '100%'}} basename={"/tank-tactics"}>
+        <Router style={{height: '100%'}}>
             <Switch style={{height: '100%'}}>
                 <Route exact path="/" style={{height: '100%'}}>
                     <Login/>
-                </Route>
-                <Route exact path="/admin">
-                    <AdminLogin/>
                 </Route>
                 <Route exact path="/:id">
                     <ValidIdWrapper>

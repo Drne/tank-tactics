@@ -1,18 +1,24 @@
-import {Fade, Grid, Paper} from "@material-ui/core";
-import wrapWithActionPrompt from "../actions/ActionPrompt";
-import TankSpace from "../TankSpace";
-import getDistanceBetweenPositions from "../../utilities/getDistanceBetweenPositions";
+import {makeStyles, Paper} from "@material-ui/core";
 import {useContext, useMemo} from "react";
 import {GameStateContext} from "../prodivers/GameStateProvider";
+import getDistanceBetweenPositions from "../../utilities/getDistanceBetweenPositions";
+import wrapWithActionPrompt from "../actions/ActionPrompt";
+import TankSpace from "../TankSpace";
+import useQuery from "../../hooks/useQuery";
+import wrapWithPlayerData from "../PlayerData";
 
 export default function GameBoard() {
+
     const {gameState} = useContext(GameStateContext);
+    const {params} = useQuery();
 
-    const gameBoard = useMemo(() => {
+    const classes = useStyles({gameState});
 
-        const backgroundColors = ['lightGreen', 'orange', 'red']
-
-        function generateGridLayout() {
+    const gridLayout = useMemo(() => {
+            const isDarkMode = params.has('darkMode');
+            const gridColor = isDarkMode ? '#000000' : "#D3D3D3"
+            const stripeFactory = (stripeColor) => `repeating-linear-gradient(-45deg,  ${stripeColor},  ${stripeColor} 10px,  ${gridColor} 10px, ${gridColor} 20px)`
+            const backgroundColors = [stripeFactory("#5C8248FF"), stripeFactory("#FFB862"), stripeFactory("#FF6262")]
             const components = []
 
             const generateInternalComponents = (y) => {
@@ -22,27 +28,45 @@ export default function GameBoard() {
                     if (gameState?.userData.filter((playerData) => playerData.position && playerData.position === [y, x])) {
                         playerAtPosition = gameState.userData.filter((playerData) => playerData.position && playerData.position[0] === y && playerData.position[1] === x)[0]
                     }
-                    const distanceFromPlayer = getDistanceBetweenPositions(gameState?.player.position, [y, x])
-                    const borderColor = distanceFromPlayer < 3 ? backgroundColors[distanceFromPlayer] : 'lightGray'
-                    const space = (
+
+                    let background = gridColor;
+                    let border = ''
+                    if (!gameState?.spectator) {
+                        // Range indicator and player border
+                        const distanceFromPlayer = getDistanceBetweenPositions(gameState?.player.position, [y, x])
+                        if (params.has('rangeIndicator') && distanceFromPlayer < 3) {
+                            background = backgroundColors[distanceFromPlayer]
+                        } else if (distanceFromPlayer === 0) {
+                            if (isDarkMode) {
+                                border = 'thick solid blue'
+                            } else {
+                                border = "thin solid blue"
+                            }
+                        } else if (isDarkMode) {
+                            border = "thin dotted lightgray"
+                        }
+                    }
+
+                    const wrapper = gameState?.spectator ? wrapWithPlayerData : wrapWithActionPrompt
+                    let itemToPush = (
                         <Paper style={{
                             textAlign: 'center',
                             flex: 1,
-                            backgroundColor: borderColor,
+                            background: background,
                             cursor: 'pointer',
-                            boxSizing: 'border-box'
-                        }}>
-                            {wrapWithActionPrompt([y, x], playerAtPosition ?
+                            boxSizing: 'border-box',
+                            height: '100%',
+                            width: '100%',
+                            border: border
+                        }} key={`${x}_${y}`}>
+                            {wrapper([y, x], playerAtPosition ?
                                 <TankSpace health={playerAtPosition.health} supply={playerAtPosition.supply}
                                            name={playerAtPosition.name} id={`${x}${y}`}/> :
-                                <div style={{minHeight: '60px', minWidth: '60px'}} id={`${x}${y}`}/>)}
+                                <div className={classes.blankSpace} id={`${x}${y}`} key={`${x}${y}`}/>)}
                         </Paper>)
-                    let itemToPush = (<div>
-                        {space}
-                    </div>)
                     if (x === -1 || y === -1) {
                         if (x === -1 && y === -1) {
-                            itemToPush = (<div style={{width: '20px'}}/>)
+                            itemToPush = (<div style={{width: '20px'}} key={`${x} ${y}`}/>)
                         } else {
                             const indexNum = x === -1 ? y : x;
                             const maxWidth = y === -1 ? '100%' : '20px'
@@ -52,35 +76,46 @@ export default function GameBoard() {
                                     alignSelf: 'center',
                                     maxWidth: maxWidth,
                                     color: 'white'
-                                }} id={`${x}${y}`}> {indexNum} </div>)
+                                }} id={`${x}${y}`} key={`${x} ${y}`}> {indexNum} </div>)
                         }
                     }
-                    internalComponents.push(itemToPush)
+                    components.push(itemToPush)
                 }
-            return internalComponents;
+                return internalComponents;
             }
 
-
-            for (let i = -1; i < gameState.bounds[0]; i++) {
-                components.push(<div>
-                    {generateInternalComponents(i)}
-                </div>)
+            if (gameState) {
+                for (let i = -1; i < gameState.bounds[0]; i++) {
+                    generateInternalComponents(i)
+                }
             }
             return components;
-        }
-
-        return (
-            <>
-                {gameState && gameState.bounds && generateGridLayout()}
-            </>
-        )
-    }, [gameState])
+        },
+        [classes.blankSpace, gameState, params]
+    );
 
     return (
-        <Grid container justifyContent="space-around" style={{height: 'calc(100% - 24px)'}}>
-            <Fade>
-                {gameBoard}
-            </Fade>
-        </Grid>
+        <div className={classes.containerGrid}>
+            {gridLayout}
+        </div>
     )
 }
+
+const useStyles = makeStyles({
+    containerGrid: {
+        backgroundColor: 'slategray',
+        height: '100%',
+        display: 'grid',
+        gridTemplateColumns: ({gameState}) => `20px repeat(${gameState ? gameState.bounds[1] : 'auto-fill'}, 1fr)`,
+        gridTemplateRows: ({gameState}) => `20px repeat(${gameState ? gameState.bounds[0] : 'auto-fill'}, 1fr)`
+    },
+    paper: {
+        height: '100%',
+        width: '100%',
+    },
+    blankSpace: {
+        height: '100%',
+        width: '100%',
+        minWidth: '30px'
+    }
+})

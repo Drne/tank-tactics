@@ -26,7 +26,7 @@ export default function Login() {
     return (
         <div style={{backgroundColor: 'lightslategrey', height: '100vh'}}>
             <TextField style={{position: 'absolute', top: '50%', transform: 'translate(-50%, -50%)'}}
-                       onSubmit={() => console.log('tada')} onKeyDown={onKeyDown} value={value} onChange={handleChange}
+                       onKeyDown={onKeyDown} value={value} onChange={handleChange}
                        error={errorMessage !== ''} helperText={errorMessage}/>
             {validID ? <Redirect to={`${validID}`}/> : ''}
         </div>

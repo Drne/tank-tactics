@@ -53,7 +53,8 @@ const useStyles = makeStyles(() => ({
     statContainer: {
         display: 'flex',
         flexDirection: ({ vertical }) => vertical ? 'column' : 'row',
-        placeContent: 'space-around'
+        placeContent: 'space-around',
+        flexWrap: 'wrap'
     },
     stat: {
         display: 'flex',

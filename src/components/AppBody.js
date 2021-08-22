@@ -3,12 +3,13 @@ import {useContext, useState} from "react";
 import {GameStateContext} from "./prodivers/GameStateProvider";
 import MenuIcon from '@material-ui/icons/Menu';
 import HistoryDrawer from "./drawers/HistoryDrawer";
-import GameBoardV2 from "./gameboard/GameboardV2";
+import GameBoard from "./gameboard/GameBoard";
 import JuryDrawer from "./drawers/JuryDrawer";
 import MenuDrawer from "./drawers/MenuDrawer";
 import StatDrawer from "./drawers/StatDrawer";
 import Ceasefire from "./timers/Ceasefire";
 import Resupply from "./timers/Resupply";
+import PlayerStats from "./PlayerStats";
 
 export default function AppBody() {
     const {gameState, isLoading} = useContext(GameStateContext);
@@ -30,32 +31,37 @@ export default function AppBody() {
                     </IconButton>
                     {(!isLoading || gameState) && (
                         <>
-                            <Typography style={{padding: 5}}>
-                                {gameState?.player.name}
-                            </Typography>
-                            {gameState?.player.alive ?
+                            {gameState?.spectator ?
                                 <>
                                     <Typography style={{padding: 5}}>
-                                        Supply: {gameState?.player.supply}
-                                    </Typography>
-                                    <Typography style={{padding: 5}}>
-                                        Health: {gameState?.player.health}
+                                        Spectator
                                     </Typography>
                                 </>
-                                : <Typography style={{padding: 5}}>
-                                    Votes: {gameState?.player.votes}
-                                </Typography>}
-                            {!gameState?.player.alive ?
-                                <Typography style={{padding: 5}}>
-                                    You are dead
-                                </Typography> : ''
+                                :
+                                <>
+                                    <Typography style={{padding: 5}}>
+                                        {gameState?.player.name}
+                                    </Typography>
+                                    {gameState?.player.alive ?
+                                        <PlayerStats health={gameState?.player.health}
+                                                     supply={gameState?.player.supply}
+                                                     votes={gameState?.player.votesForToday}/>
+                                        : <Typography style={{padding: 5}}>
+                                            Votes: {gameState?.player.votes}
+                                        </Typography>}
+                                    {!gameState?.player.alive ?
+                                        <Typography style={{padding: 5}}>
+                                            You are dead
+                                        </Typography> : ''
+                                    }
+                                </>
                             }
                         </>
                     )}
-                    {gameState?.nextResupplyTime && <Resupply />
+                    {gameState?.nextResupplyTime && <Resupply/>
                     }
                     {
-                        gameState?.ceasefire && <Ceasefire />
+                        gameState?.ceasefire && <Ceasefire/>
                     }
                 </div>
             </AppBar>
@@ -64,7 +70,7 @@ export default function AppBody() {
                         setIsJuryOpen={setJuryDrawerOpen} setIsStatsOpen={setStatsDrawerOpen}/>
             <HistoryDrawer open={historyDrawerOpen} setOpen={setHistoryDrawerOpen}/>
             <JuryDrawer open={juryDrawerOpen} setOpen={setJuryDrawerOpen}/>
-            <GameBoardV2/>
+            <GameBoard/>
         </div>
     )
 }
