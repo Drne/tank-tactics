@@ -18,7 +18,7 @@ export default function AppRouter() {
                 <Route exact path="/admin">
                     <AdminLogin/>
                 </Route>
-                <Route path="/:id">
+                <Route exact path="/:id">
                     <ValidIdWrapper>
                         <SnackbarProvider anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
                             <GameStateProvider>

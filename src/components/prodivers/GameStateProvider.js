@@ -12,7 +12,7 @@ export default function GameStateProvider({ children }) {
     const { id } = useParams();
     const [gameState, setGameState] = useState();
     const [socket, setSocket] = useState();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     let history = useHistory();
     const {enqueueSnackbar} = useSnackbar();
     

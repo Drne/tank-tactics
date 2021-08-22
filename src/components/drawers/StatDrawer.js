@@ -10,8 +10,11 @@ export default function StatDrawer({isOpen, setIsOpen}) {
     return (
         <Drawer open={isOpen} anchor="left" onClose={() => setIsOpen(false)} classes={{paper: classes.drawer}}>
             <Paper className={classes.container}>
+                <Typography>
+                    Commanders
+                </Typography>
                 <div className={classes.gridContainer}>
-                    {gameState && gameState.userData.map(userData => (
+                    {gameState && gameState.userData.filter((user) => user.alive).map(userData => (
                         <Paper className={classes.paper} key={userData.name}>
                             <div>
                                 <Typography align={"center"}>
@@ -31,6 +34,45 @@ export default function StatDrawer({isOpen, setIsOpen}) {
                                             className={classes.img} alt="health"/>
                                         <Typography>
                                             {userData.health}
+                                        </Typography>
+                                    </div>
+                                    <div className={classes.statContainer}>
+                                        <img
+                                            src={"https://www.freeiconspng.com/uploads/healthcare-skull-icon-5.png"}
+                                            className={classes.img} alt="kills"/>
+                                        <Typography>
+                                            {userData.kills}
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </div>
+                        </Paper>
+                    ))}
+                </div>
+                <Typography >
+                    Jury
+                </Typography>
+                <div className={classes.gridContainer}>
+                    {gameState && gameState.userData.filter((user) => !user.alive).map(userData => (
+                        <Paper className={classes.paper} key={userData.name}>
+                            <div>
+                                <Typography align={"center"}>
+                                    {userData.name}
+                                </Typography>
+                                <div className={classes.statContainer}>
+                                    <div className={classes.statContainer}>
+                                        <img src={"https://static.thenounproject.com/png/981735-200.png"}
+                                             className={classes.img} alt="votes"/>
+                                        <Typography>
+                                            {userData.votes}
+                                        </Typography>
+                                    </div>
+                                    <div className={classes.statContainer}>
+                                        <img
+                                            src={"https://www.freeiconspng.com/uploads/healthcare-skull-icon-5.png"}
+                                            className={classes.img} alt="kills"/>
+                                        <Typography>
+                                            {userData.kills}
                                         </Typography>
                                     </div>
                                 </div>
