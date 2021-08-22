@@ -58,6 +58,8 @@ export default function AliveActions({position}) {
 
     const submitDisabled = actionCost > gameState?.player.supply - 1 || disabled
 
+    const targetingSelf = gameState.player.position[0] === y && gameState.player.position[1] === x;
+
     const availableUpgrades = gameState ? Math.max(gameState.player.supply - 1, 0) : 0
     return (
         <div>
@@ -87,15 +89,18 @@ export default function AliveActions({position}) {
                     <div className={classes.submitContainer}>
                         <div className={classes.loadingButtonContainer}>
                             <Button type="submit" variant="contained" color="primary"
-                                    disabled={submitDisabled || isLoading}
+                                    disabled={submitDisabled || isLoading || targetingSelf}
                                     onClick={onSubmit}>
                                 Submit
                             </Button>
                             {isLoading && <CircularProgress size={24} className={classes.buttonProgress}/>}
                         </div>
-                        {submitDisabled ? <Typography className={classes.submitErrorMessage}>
+                        {submitDisabled && !targetingSelf && <Typography className={classes.submitErrorMessage}>
                             Insufficient Supply!
-                        </Typography> : ''}
+                        </Typography>}
+                        {targetingSelf && <Typography className={classes.submitErrorMessage}>
+                            Can't target Self!
+                        </Typography>}
                     </div>
                 </div>
                 {playerAtPosition &&
