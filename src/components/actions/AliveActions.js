@@ -7,7 +7,7 @@ import {
     RadioGroup,
     Typography
 } from "@material-ui/core";
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {GameStateContext} from "../prodivers/GameStateProvider";
 import {useParams} from "react-router-dom";
 import {LiveDataContext} from "../prodivers/LiveDataProvider";
@@ -31,14 +31,6 @@ export default function AliveActions({position}) {
     if (gameState?.userData.filter((playerData) => playerData.position && playerData.position === [y, x])) {
         playerAtPosition = gameState.userData.filter((playerData) => playerData.position && playerData.position[0] === y && playerData.position[1] === x)[0]
     }
-
-    useEffect(() => {
-        if (action === 'move' && playerAtPosition) {
-            setAction('fireRound')
-        } else if (action !== 'move' && !playerAtPosition) {
-            setAction('move');
-        }
-    }, [action, gameState, playerAtPosition])
 
     const actionCost = useMemo(() => {
         if (gameState) {
