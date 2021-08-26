@@ -70,11 +70,11 @@ export default function AliveActions({position}) {
                 <FormLabel component="legend">Actions (base cost 1)</FormLabel>
                 <RadioGroup row onChange={(event) => setAction(event.target.value)} value={action}>
                     <FormControlLabel value="move" control={<Radio color={"primary"}/>} label="Move"
-                                      disabled={disabled || playerAtPosition} labelPlacement="top"/>
+                                       labelPlacement="top"/>
                     <FormControlLabel value="fireRound" control={<Radio color={"primary"}/>} label="Fire Round"
-                                      disabled={disabled || !playerAtPosition} labelPlacement="top"/>
+                                       labelPlacement="top"/>
                     <FormControlLabel value="fireSupply" control={<Radio color={"primary"}/>} label="Fire Supply"
-                                      disabled={disabled || !playerAtPosition} labelPlacement="top"/>
+                                       labelPlacement="top"/>
                 </RadioGroup>
             </FormControl>
             <div className={classes.bottomContainer}>
